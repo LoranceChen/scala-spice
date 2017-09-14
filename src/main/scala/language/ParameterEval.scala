@@ -23,5 +23,11 @@ object ParameterEval extends App {
   def a = {println("aaaaaa");"aaa"}
   def b = {println("bbbbbbb"); "bbb"}
 
+  /**
+    * aaaaaa
+      aaa
+      bbbbbbb
+      bbb
+    */
   new A().f1(a).f2(b)
 }
