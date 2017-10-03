@@ -10,6 +10,11 @@ libraryDependencies ++= Seq(
 
 libraryDependencies += "com.lihaoyi" % "ammonite-sshd_2.12.3" % "1.0.2" // cross CrossVersion.full
 
+libraryDependencies ++= Seq(
+  "com.typesafe.akka" %% "akka-actor" % "2.5.6",
+  "com.typesafe.akka" %% "akka-testkit" % "2.5.6" % Test
+)
+
 //unmanagedBase := baseDirectory.value / "lib"
 
 cancelable in Global := true
