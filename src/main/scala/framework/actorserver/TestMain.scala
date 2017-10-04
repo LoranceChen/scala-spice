@@ -3,7 +3,7 @@ package framework.actorserver
 import akka.actor.ActorSystem
 
 
-object Test extends App {
+object TestMain extends App {
   implicit val akkaSys = ActorSystem("test")
   val server = new Server()
   val mod = new MyMod(server)
@@ -12,10 +12,10 @@ object Test extends App {
 
   val r1 = mod.add('joe, "at home")
 
-  println(r1)
+  println(r1) // result: 'ok
 
   val r2 = mod.whereid('joe)
 
-  println(r2)
+  r2.foreach(println) // result: Some("at home")
 
 }
