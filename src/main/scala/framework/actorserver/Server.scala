@@ -13,7 +13,7 @@ class Server(implicit actorSys: ActorSystem) {
     Server.register(name, actorSys.actorOf(Props(new MyActor(name, mod, mod.init()))))
   }
 
-  def rpc[Req, Rsp](name: Symbol, request: Req): Future[Rsp] = {
+  def rpc[Req, Rsp](name: Symbol, request: Req)(implicit mf: Manifest[Rsp]): Future[Rsp] = {
     class Handle(result: Promise[Rsp]) extends Actor {
       override def receive: Receive = {
         case (_: Symbol, response: Rsp) =>
@@ -34,9 +34,9 @@ class Server(implicit actorSys: ActorSystem) {
     override def receive: Receive = loop(name: Symbol, mod: Mod, state: State)
 
     def loop(name: Symbol, mod: Mod, state: State): Receive = {
-      case (sender: ActorRef, request) =>
+      case (sdr: ActorRef, request) =>
         val (response, state1) = mod.handle(request, state)
-        sender ! (name, response)
+        sdr ! (name, response)
         context.become(loop(name: Symbol, mod, state1))
     }
   }

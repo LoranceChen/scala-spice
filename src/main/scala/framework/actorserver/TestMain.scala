@@ -1,7 +1,7 @@
 package framework.actorserver
 
 import akka.actor.ActorSystem
-
+import scala.concurrent.ExecutionContext.Implicits.global
 
 object TestMain extends App {
   implicit val akkaSys = ActorSystem("test")
@@ -12,10 +12,11 @@ object TestMain extends App {
 
   val r1 = mod.add('joe, "at home")
 
-  println(r1) // result: 'ok
+  r1.foreach(println) // result: 'ok
 
   val r2 = mod.whereid('joe)
 
   r2.foreach(println) // result: Some("at home")
 
+  Thread.currentThread().join()
 }
