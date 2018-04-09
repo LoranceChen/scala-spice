@@ -44,6 +44,7 @@ object ChatRoom {
     Actor.immutable[Command] { (ctx, msg) ⇒
       msg match {
         case GetSession(screenName, client) ⇒
+          // 由spawnAdapter生成的wrapper actor会把收到的PostMessage转化成PostSessionMessage，然后发送到ctx的这个当前的actor中
           val wrapper = ctx.spawnAdapter {
             p: PostMessage ⇒ PostSessionMessage(screenName, p.message)
           }
@@ -72,6 +73,7 @@ object TypedActor extends App {
     implicit val sd = system.scheduler
 
     val future: Future[Greeted] = system ?[Greeted] (Greet("world", _))
+
 
     for {
       greeting <- future.recover { case ex ⇒ ex.getMessage }
@@ -115,7 +117,6 @@ object TypedActor extends App {
     val system = ActorSystem(main, "ChatRoomDemo")
     Await.result(system.whenTerminated, 3.seconds)
   }
-
 
 //  testHelloWorld
   testChatRoom

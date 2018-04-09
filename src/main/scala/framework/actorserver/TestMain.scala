@@ -14,7 +14,9 @@ object TestMain extends App {
 
   r1.foreach(println) // result: 'ok
 
-  val r2 = mod.whereid('joe)
+  Thread.sleep(1000)
+
+  val r2 = mod.whereid('joe2)
 
   r2.foreach(println) // result: Some("at home")
 

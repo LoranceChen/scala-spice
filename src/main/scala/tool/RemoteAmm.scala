@@ -15,7 +15,7 @@ object RemoteAmm extends App {
     val replServer = new SshdRepl(
       SshServerConfig(
         address = "localhost", // or "0.0.0.0" for public-facing shells
-        port = 22222, // Any available port
+        port = 22223, // Any available port
         passwordAuthenticator = Some(new PasswordAuthenticator {
           def authenticate(username: String, password: String, session: ServerSession): Boolean = {
             (username, password) == ("user", "pwd")
