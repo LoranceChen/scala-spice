@@ -1,5 +1,8 @@
 package jv.runtime;
 
+/**
+ * https://stackoverflow.com/questions/22110151/cost-of-each-class-in-java-application-fewer-huge-classes-or-several-smaller-o
+ */
 public class ClassInstSize {
     public static void main(String[] args) {
         Object[] array = new Object[10_000_000];
