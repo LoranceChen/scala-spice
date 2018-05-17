@@ -10,6 +10,7 @@ object AkkaBehaviour extends App {
   a ! 'do_1
   a ! 'do_2
   a ! 'do_3
+  a ! 'do_1
 
   Thread.currentThread().join()
 }
@@ -19,7 +20,7 @@ class AkkaBehaviour extends Actor {
     case 'do_1 => println("do_1")
     case 'do_2 => context.become({
       case 'do_3 => println("do_2 and then do_3")
-    })
+    }, false)
   }
 
 }
